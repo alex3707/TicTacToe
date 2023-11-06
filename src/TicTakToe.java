@@ -45,6 +45,17 @@ public class TicTakToe extends JComponent {
                 field[i][j] = isXturn?FIELD_X:FIELD_0;
                 isXturn = !isXturn;
                 repaint();
+                int res = checkState();
+                if(res != 0){
+                    if(res == FIELD_0 * 3)
+                        JOptionPane.showMessageDialog(this, "Нолики выиграли", "Победа", JOptionPane.INFORMATION_MESSAGE);
+                    else if(res == FIELD_X * 3)
+                        JOptionPane.showMessageDialog(this, "Крестики вымграли", "Победа", JOptionPane.INFORMATION_MESSAGE);
+                    else
+                        JOptionPane.showMessageDialog(this, "Ничья", "Ничья", JOptionPane.INFORMATION_MESSAGE);
+                    initGame();
+                    repaint();
+                }
             }
         }
     }
@@ -67,17 +78,17 @@ public class TicTakToe extends JComponent {
         int dh = getHeight() / 3;
         int x = i * dw;
         int y = j * dh;
-        graphics.drawLine(x,y,x+dw,y+dh);
-        graphics.drawLine(x, y+dh, x+dw, y);
+        graphics.drawLine(x + 10,y + 10,x+dw - 10,y+dh - 10);
+        graphics.drawLine(x +10 , y+dh - 10, x+dw - 10, y + 10);
     }
 
-    void drawY(int i, int j, Graphics graphics){
+    void drawO(int i, int j, Graphics graphics){
         graphics.setColor(Color.red);
         int dw = getWidth() / 3;
         int dh = getHeight() / 3;
         int x = i * dw;
         int y = j * dh;
-        graphics.drawOval(x + 5*dw/100, y, dw*9/10, dh);
+        graphics.drawOval(x + 5*dw/20, y + 10, dw*5/10, dh-20);
     }
     void drawX0(Graphics graphics){
         for(int i = 0; i < 3; i++){
@@ -85,9 +96,47 @@ public class TicTakToe extends JComponent {
                 if(field[i][j] == FIELD_X)
                     drawX(i, j, graphics);
                 else if(field[i][j] == FIELD_0)
-                    drawY(i,j,graphics);
+                    drawO(i,j,graphics);
             }
         }
+    }
+
+    int checkState(){
+        int diag = 0;
+        int diag2 = 0;
+        for(int i = 0; i < 3; i++){
+            diag += field[i][i];
+            diag2 += field[i][2-i];
+        }
+        if(diag == FIELD_0 * 3 || diag == FIELD_X * 3){
+            return diag;
+        }
+        if(diag2 == FIELD_0 * 3 || diag2 == FIELD_X * 3){
+            return diag2;
+        }
+        int check_i, check_j;
+        boolean hasEmpty = false;
+        for(int i = 0; i < 3; i++){
+            check_i = 0;
+            check_j = 0;
+            for (int j = 0; j < 3; j++){
+                if(field[i][j] == 0){
+                    hasEmpty = true;
+                }
+                check_i += field[i][j];
+                check_j += field[j][i];
+            }
+            if(check_i == FIELD_0 * 3 || check_i == FIELD_X * 3){
+                return check_i;
+            }
+            if(check_j == FIELD_0 * 3 || check_j == FIELD_X * 3){
+                return  check_j;
+            }
+        }
+        if(hasEmpty)
+            return 0;
+        else
+            return -1;
     }
 
 
