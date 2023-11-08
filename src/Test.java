@@ -12,6 +12,13 @@ public class Test {
         window.setLayout(new BorderLayout());
         window.setLocationRelativeTo(null);
 
+        //Создаем меню бар
+        JMenuBar menuBar = new JMenuBar();
+        JMenuItem exit = new JMenuItem(new ExitAction());
+        exit.setIcon(new ImageIcon("resources/exit.png"));
+        menuBar.add(exit);
+        window.getContentPane().add(BorderLayout.NORTH, menuBar);
+
         TicTakToe game = new TicTakToe();
         window.add(game);
         window.setVisible(true);
