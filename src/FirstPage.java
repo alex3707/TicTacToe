@@ -1,5 +1,6 @@
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.io.Serial;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,6 +11,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 public class FirstPage extends JFrame{
+    @Serial
     private static final long serialVersionUID = 1L;
     public static String userIx, userNol;
 
@@ -35,9 +37,6 @@ public class FirstPage extends JFrame{
         userX.setToolTipText("Имя игрока крестик");
         userO.setToolTipText("Имя игрока нолик");
 
-
-
-
         JButton button = new JButton("OK");
         button.addActionListener(e -> {
             setVisible(false);
@@ -54,7 +53,6 @@ public class FirstPage extends JFrame{
 
         });
 
-
         container.add(new JLabel("                                                           "));
         container.add(new JLabel("Имя игрока X  "));
         container.add(userX);
@@ -64,7 +62,5 @@ public class FirstPage extends JFrame{
         container.add(button);
         setBounds(400, 100, 400, 200);
         setVisible(true);
-
     }
-
 }

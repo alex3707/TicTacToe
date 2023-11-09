@@ -12,8 +12,6 @@ public class TicTakToe extends JComponent {
     int win0 = 0;
     int nan = 0;
 
-
-
     public TicTakToe(){
         enableEvents(AWTEvent.MOUSE_EVENT_MASK);
         field = new int [3][3];
@@ -36,7 +34,6 @@ public class TicTakToe extends JComponent {
         graphics.clearRect(0,0,getWidth(),getHeight());
         drawGrid(graphics);
         drawX0(graphics);
-
     }
 
     @Override
@@ -151,6 +148,4 @@ public class TicTakToe extends JComponent {
         else
             return -1;
     }
-
-
 }
