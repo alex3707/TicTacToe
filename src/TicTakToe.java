@@ -8,11 +8,17 @@ public class TicTakToe extends JComponent {
     public static final int FIELD_0 = 200;
     int [][] field;
     boolean isXturn;
+    int winX = 0;
+    int win0 = 0;
+    int nan = 0;
+
+
 
     public TicTakToe(){
         enableEvents(AWTEvent.MOUSE_EVENT_MASK);
         field = new int [3][3];
         initGame();
+
     }
 
     public void initGame(){
@@ -47,12 +53,19 @@ public class TicTakToe extends JComponent {
                 repaint();
                 int res = checkState();
                 if(res != 0){
-                    if(res == FIELD_0 * 3)
-                        JOptionPane.showMessageDialog(this, "Нолики выиграли", "Победа", JOptionPane.INFORMATION_MESSAGE);
-                    else if(res == FIELD_X * 3)
-                        JOptionPane.showMessageDialog(this, "Крестики вымграли", "Победа", JOptionPane.INFORMATION_MESSAGE);
-                    else
+                    if(res == FIELD_0 * 3) {
+                        win0++;
+                        JOptionPane.showMessageDialog(this, "победа " + FirstPage.userNol + " " + win0 + " " + "раз", "Победа", JOptionPane.INFORMATION_MESSAGE);
+                    }
+
+                    else if(res == FIELD_X * 3) {
+                        winX++;
+                        JOptionPane.showMessageDialog(this, "победа " + FirstPage.userIx + " " + winX + " " + "раз", "Победа", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else {
+                        nan++;
                         JOptionPane.showMessageDialog(this, "Ничья", "Ничья", JOptionPane.INFORMATION_MESSAGE);
+                    }
                     initGame();
                     repaint();
                 }
